@@ -48,3 +48,19 @@ Caddy, HTTPS, TLS, certs
   - Use i to insert, ctrl + c to escape insert
   - x to delete whatever is to the left, X to delete whatever is to the right
   - :wq to save changes and exit file
+
+## HTML
+
+## CSS
+
+## JavaScript
+
+## Web Service
+
+## Database
+
+## Login
+
+## WebSocket
+
+## React
