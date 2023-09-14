@@ -37,4 +37,14 @@ DNS and AWS/Route53
 
 Caddy, HTTPS, TLS, certs
 
--
+- Caddy handles web certificates (importance for HTTPS), serves up HTML, CSS, and JavaScript files and acts as a gateway for subdomain requests to Simon and startup services
+- Caddy incorporates Let's Encrypt ACME Protocol
+  - Creates certificates for free that enable widespread use of HTTPS
+- Changing the CaddyFile using VI to use the domain name allows your site to use HTTPS and be more secure
+- Most browsers now expect HTTPS
+- You can use the domain name in place of the IP address to ssh into the server
+  - ssh -i ~/keys/production.pem ubuntu@rabbitholes.click
+- VI
+  - Use i to insert, ctrl + c to escape insert
+  - x to delete whatever is to the left, X to delete whatever is to the right
+  - :wq to save changes and exit file
