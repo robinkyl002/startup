@@ -8,8 +8,6 @@ Using GitHub is an effective way to track different versions of a file and allow
 
 ### Servers
 
-Class:
-
 Servers and AWS/EC2
 
 - 127.0.0.1 - Points to own machine (Localhost)
@@ -21,8 +19,22 @@ Servers and AWS/EC2
   - HTTP port is not as secure
 - Server is castle surrounding services
 - Can use a gateway to direct person to other ports in the castle
+- We will have gateway (Caddy) that directs to either simon or startup services
+- Root domain will be leased for the semester
+  - Subdomain for each service
+- SSH into server
+  - ssh -i key ubuntu@44.193.162.38
+- IP Address: 44.193.162.38
 
 DNS and AWS/Route53
-H
+
+- Domain name costs money
+- You have to choose and pay for domain name, then associate it with the server
+- NS and SOA DNS records come automatically when you get a domain name
+- Using \* in the record name allows it to apply to all subdomains
+- Certain domains are more expensive than others.
+- A request for a domain name requires time to process.
 
 Caddy, HTTPS, TLS, certs
+
+-
