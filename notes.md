@@ -59,16 +59,23 @@ Caddy, HTTPS, TLS, certs
 
 ## HTML
 
+Basic HTML file
+
+```
 <!DOCTYPE html>
 <html lang ="eng">
   <head>
     <title>First HTML </title>
   </head>
-  
+
   <body>
     Hello world
   </body>
+
 </html>
+```
+
+Use MDN WebDocs or W3Schools for help with different elements or information
 
 ## CSS
 
