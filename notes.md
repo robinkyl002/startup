@@ -34,6 +34,12 @@ DNS and AWS/Route53
 - Using \* in the record name allows it to apply to all subdomains
 - Certain domains are more expensive than others.
 - A request for a domain name requires time to process.
+- [subdomain.]\*secondary.top
+- Root domain -> secondary.top
+- Record types
+  - A/AAAA
+  - CNAME -> Alias
+  - SOA and NS -> Automatically created
 
 Caddy, HTTPS, TLS, certs
 
@@ -41,15 +47,28 @@ Caddy, HTTPS, TLS, certs
 - Caddy incorporates Let's Encrypt ACME Protocol
   - Creates certificates for free that enable widespread use of HTTPS
 - Changing the CaddyFile using VI to use the domain name allows your site to use HTTPS and be more secure
-- Most browsers now expect HTTPS
+- Most browsers now expect HTTPS - Caddy allows this
 - You can use the domain name in place of the IP address to ssh into the server
   - ssh -i ~/keys/production.pem ubuntu@rabbitholes.click
 - VI
   - Use i to insert, ctrl + c to escape insert
   - x to delete whatever is to the left, X to delete whatever is to the right
   - :wq to save changes and exit file
+- HTTPS -> Verifies that the site is legitimate to avoid malicious code being put on device
+  - Looks for web cert
 
 ## HTML
+
+<!DOCTYPE html>
+<html lang ="eng">
+  <head>
+    <title>First HTML </title>
+  </head>
+  
+  <body>
+    Hello world
+  </body>
+</html>
 
 ## CSS
 
