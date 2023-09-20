@@ -59,7 +59,7 @@ Caddy, HTTPS, TLS, certs
 
 ## HTML
 
-Basic HTML file
+### Basic HTML file
 
 ```
 <!DOCTYPE html>
@@ -76,6 +76,102 @@ Basic HTML file
 ```
 
 Use MDN WebDocs or W3Schools for help with different elements or information
+
+### HTML Structure Assignment
+
+Tags
+
+- a href = "link"
+  - anchor text to hyperlink
+- div
+  - specifies a specific block division
+- nav
+  - navigation inputs
+- aside
+  - aside content from main item
+- table
+  - table row (tr), table header (th), table data (td)
+- main
+  - main content on page
+- section
+  - part of main content
+- script
+  - JavaScript
+- head
+  - header information
+- title
+  - title of the page
+- meta
+  - metadata for the page
+- include
+  - external content reference
+- body
+  - body content
+- header
+- footer
+- span
+  - inline span of content
+- h<1-9>
+  - text headers 1-9 (1 is largest, 9 is smallest)
+- p
+  - paragraph of text
+- b
+  - bring attention
+- ol, ul
+  - ordered, unordered list
+- li
+  - list item
+- img
+  - graphical image reference
+- dialog
+  - interactive component such as a confirmation
+- form
+  - collection of user input
+- input
+  - user input field
+- audio
+  - audio content
+- video
+  - video content
+- svg
+  - scalable vector graphic content
+- iframe
+  - inline frame of anoher HTML page
+
+Some characters have to use special entities to show up on the page as they are used in HTML
+
+```
+<!DOCTYPE html>
+<html lang ="eng">
+
+  <body>
+    <table>
+    <tr>
+      <th>Character</th>
+      <th>Entity</th>
+    </tr>
+    <tr>
+      <td>&</td>
+      <td>&amp;</td>
+    </tr>
+    </table>
+  </body>
+
+</html>
+
+
+```
+
+Character Entity
+
+> & &amp;
+> < &lt;
+>
+> >         &gt;
+> >
+> > " &quot;
+> > ' &apos;
+> > 😀 &#128512;
 
 ## CSS
 
