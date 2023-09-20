@@ -138,40 +138,14 @@ Tags
 - iframe
   - inline frame of anoher HTML page
 
-Some characters have to use special entities to show up on the page as they are used in HTML
+Some characters have to use special entities to show up on the page as they are used in HTML. For example:
 
-```
-<!DOCTYPE html>
-<html lang ="eng">
-
-  <body>
-    <table>
-    <tr>
-      <th>Character</th>
-      <th>Entity</th>
-    </tr>
-    <tr>
-      <td>&</td>
-      <td>&amp;</td>
-    </tr>
-    </table>
-  </body>
-
-</html>
-
-
-```
-
-Character Entity
-
-> & &amp;
-> < &lt;
->
-> >         &gt;
-> >
-> > " &quot;
-> > ' &apos;
-> > 😀 &#128512;
+- &amp;
+- &lt;
+- &gt;
+- &quot;
+- &apos;
+- &#128512;
 
 ## CSS
 
