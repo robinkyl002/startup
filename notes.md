@@ -246,7 +246,34 @@ canvas
 - facilitates 2D drawing and animation
 - drawing requires JS
 
+### Class Notes
+
+#### Simon HTML
+
+- clone the simon repository and deploy it to the server to see it.
+- use live server to test small changes
+- html element is highest level element in the language
+- head element contains metadata, what title will show on the tab
+- link has attribute rel(relation) icon, references image for the icon
+  - icon on the tab
+  - link in simon uses link to file on server, but you can use an image from the internet
+- body is what is on the page
+- Header shows at the top
+  - superscript tag with registered trademark tag (`&reg;`)
+  - navigation bar with list items
+    - menu is like unordered list
+- main is main section of the page
+- footer is like document footer
+  - br element is like newline, pushes to the next line
+- The class attribute allows you to make changes to all elements of the same type
+
 ## CSS
+
+### Class Notes
+
+#### September 21
+
+- Some styling can be done inline in HTML by using style attribute
 
 ## JavaScript
 
