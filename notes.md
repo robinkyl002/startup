@@ -155,7 +155,7 @@ Elements for accepting input of user data
 | form | Input container and submission | `<form action="form.html" method="post">` |
 | fieldset | Labeled input grouping | `<fieldset> ... </fieldset>` |
 | input | Multiple types of user input | `<input type="" />` |
-| select | Selection dropdown | ``<select><option>1</option></select>` |
+| select | Selection dropdown | `<select><option>1</option></select>` |
 | optgroup | Grouped selection dropdown | `<optgroup><option>1</option></optgroup>` |
 | option | Selection option | `<option selected>option2</option>` |
 | textarea | Multiline text input | `<textarea></textarea>` |
@@ -210,6 +210,41 @@ If you want to change the default on input type color, it has to be in hexadecim
 Range requires some JS
 
 A placeholder displays the provided text in the box as instructions to the user on what information should be input.
+
+### HTML Media Assignment
+
+#### External Media
+
+Use src to link in audio, video or images using the link
+
+img
+
+- alt gives alternate text for the image
+
+audio
+
+- controls gives the user access to the controls for the playback of the audio
+- autoplay attribute starts the playback as soon as the file is loaded
+- loop attribute keeps audio playing over and over again
+
+video
+
+- controls
+- autoplay
+- `crossorigin="anonymous"`
+  - May need to be used if you are requesting files from a different domain than the one serving your content
+- On churchofjesuschrist.org you can get the link for video by left clicking on the video, clicking on asset info, then clicking on the copy icon next to the desired resolution.
+
+#### Internal Media
+
+svg
+
+- render graphics in inline HTML
+
+canvas
+
+- facilitates 2D drawing and animation
+- drawing requires JS
 
 ## CSS
 
