@@ -77,7 +77,9 @@ Caddy, HTTPS, TLS, certs
 
 Use MDN WebDocs or W3Schools for help with different elements or information
 
-### HTML Structure Assignment
+### Assignments
+
+#### HTML Structure Assignment
 
 Tags
 
@@ -147,7 +149,7 @@ Some characters have to use special entities to show up on the page as they are 
 - &apos;
 - &#128512;
 
-### HTML Input Assignment
+#### HTML Input Assignment
 
 Elements for accepting input of user data
 | Element | Meaning | Example |
@@ -166,7 +168,7 @@ Elements for accepting input of user data
 - form element used to be the only way to send a user's input to the web server as part of a request to see a new page
   - Most often used as a container now that we use JavaScript to perform this function
 
-#### Options for input type attributes
+##### Options for input type attributes
 
 | Type           | Meaning                           |
 | -------------- | --------------------------------- |
@@ -193,7 +195,7 @@ Example of setting type attribute:
 <label for="checkbox1">Check me</label> <input type="checkbox" name="varCheckbox" value="checkbox1" checked />
 ```
 
-#### Common attributes of input elements
+##### Common attributes of input elements
 
 | Attribute | Meaning                                                                             |
 | --------- | ----------------------------------------------------------------------------------- |
@@ -211,9 +213,9 @@ Range requires some JS
 
 A placeholder displays the provided text in the box as instructions to the user on what information should be input.
 
-### HTML Media Assignment
+#### HTML Media Assignment
 
-#### External Media
+##### External Media
 
 Use src to link in audio, video or images using the link
 
@@ -235,7 +237,7 @@ video
   - May need to be used if you are requesting files from a different domain than the one serving your content
 - On churchofjesuschrist.org you can get the link for video by left clicking on the video, clicking on asset info, then clicking on the copy icon next to the desired resolution.
 
-#### Internal Media
+##### Internal Media
 
 svg
 
@@ -245,6 +247,18 @@ canvas
 
 - facilitates 2D drawing and animation
 - drawing requires JS
+
+#### Simon HTML Assignment
+
+- When using the deploy script, it does not matter where the key is stored, so long as you specify the directory wherein it is contained.
+
+  - Use the following deployment script making sure to give the right path to the key
+
+    - `  ./deployFiles.sh -k ~/keys/key.pem -h rabbitholes.click -s simon`
+
+- The Document Object Model is critical to understanding how the page is setup.
+- Don't be afraid to create several layers of tags inside of other tags if that is what is needed for the structure
+- Be aware of stylistic changes you will want to make, and consider creating classes for groups of objects for whom the formatting should be the same.
 
 ### Class Notes
 
