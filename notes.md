@@ -289,6 +289,202 @@ canvas
 
 - Some styling can be done inline in HTML by using style attribute
 
+#### September 26 - Rules, Box Model, Fonts, Animation, Grid, Flex
+
+<details>
+
+<summary>Rules</summary>
+
+```
+<body>
+  <p style="color:red">CSS</p>
+</body>
+```
+
+- style attribute allows embedding CSS right into HTML without having a special file.
+- Shorthand for rules
+
+- selector that rule is applied to
+  - rule (can have many declarations)
+    - property (color)
+    - declaration (recognized by colon)
+    - value (green)
+
+Example:
+
+```
+p {
+  color: green;
+}
+```
+
+If you want to put it straight into HTML file
+
+```
+<head>
+  <style>
+  p {
+    color: green;
+  }
+  </style>
+</head>
+```
+
+Link to style sheet in header:
+
+```
+<link rel="stylesheet" href="styles.css" />
+```
+
+Multiple declarations in a rule:
+
+```
+p {
+  color: rgb(51, 112, 169);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 3em;
+  font-weight: bold;
+  text-align: center;
+  padding: 1em;
+  transform: rotate(-45deg);
+}
+```
+
+- font size 3em means that it will be 3 times the default size of the parent m in that font
+
+Precedence
+
+1. Inline attribute
+1. Declaration in style section of HTML
+1. Outside file
+
+Nested elements
+
+- Will inherit from parent element unless the current element has overriding style
+
+Selectors
+
+- element
+  - Example: div
+  - Apply to any div element
+- ID
+  - Example: #root
+  - element with attribute id='root'
+- class
+  - Example: .highlight
+  - Any element with attribute class='highlight'
+- element class
+  - Example: p.highlight
+  - paragraphs with attribute class='highlight'
+- List
+  - Example: body, section
+  - Body or selection elements
+- descendants
+  - body section
+  - any section that is a descendant of a body
+- children
+  - Example: section > p
+  - List of direct children
+- pseudo
+  - state based
+
+Declarations
+
+- background-color
+- border
+- color
+- font
+- px
+- pt
+- %
+
+</details>
+
+<details>
+
+<summary>Box Model</summary>
+
+Think of every element as a box
+
+1. content
+1. padding
+1. border
+1. margin
+
+</details>
+
+<details>
+
+<summary>Fonts</summary>
+
+Fonts are an element of design that should be considered
+Pick the right combo of fonts in conjunction with what you are doing.
+
+Including fonts that are not basic:
+
+```
+@font-face {
+  font-family: 'Quicksand';
+  src: url('https://cs260.click/fonts/quicksand.woff2');
+}
+
+p {
+  font-family: Quicksand;
+}
+```
+
+or
+
+```
+@import
+url("https://fonts.googleapis.com/css2?family=RubikMicrobe&display=swap");
+
+p {
+  font-family: "Rubik Microbe";
+}
+```
+
+- Pulls directly from the internet to get the font
+- display=swap tells it to use another font, then shows the font when it has loaded
+
+</details>
+
+<details>
+
+<summary> Animation </summary>
+
+```
+p {
+  text-align: center;
+  font-size: 20vh;
+
+  animation-name: demo;
+  animation-duration: 3s;
+}
+
+@keyframes demo {
+  from {
+    font-size: 0vh;
+  }
+
+  95% {
+    font-size: 21vh;
+  }
+
+  to {
+    font-size: 20vh;
+  }
+}
+```
+
+</details>
+
+<details>
+
+<summary>Responsive, Grid, Flex</summary>
+
+</details>
+
 ## JavaScript
 
 ## Web Service
