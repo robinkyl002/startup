@@ -36,3 +36,5 @@ Have you ever gone down a rabbit hole when you tried to search something up on y
 - Login - Register and login users.
 - WebSocket - The program casts the three highest scores to all players while they are playing
 - React - Web framework
+
+## HTML
