@@ -479,9 +479,170 @@ p {
 
 </details>
 
+#### September 28 Class
+
 <details>
 
 <summary>Responsive, Grid, Flex</summary>
+
+Display
+
+- None
+  - Doesn't show up
+- Block
+  - Length of parent element it is inside
+- Inline
+  - As long as your content
+- Flex
+  - Everything in element is displayed in flex manner
+  - space out nicely
+- Grid
+  - Displayed as grid elements in a table
+  - Adapt to size of screen or parent element
+
+```
+<META
+  NAME="VIEWPORT"
+  CONTENT="WIDTH=DEVICE-WIDTH, INITIAL-SCALE=1"
+/>
+```
+
+Tells browser not to do mobile optimization because code takes care of it
+
+Media queries (helps websites adapt in specified ways based on size or orientation of website.)
+
+```
+@media (orientation: portrait) {
+  div {
+    transform: rotate(270deg);
+  }
+}
+
+/* When in portrait stack content */
+@media (orientation: portrait) {
+  body {
+    flex-direction: column;
+  }
+}
+
+/* When size gets smaller than 500 pixels, cause aside element to disappear */
+@media ((orientaion: portrait) and (max-height: 500px)) {
+  aside {
+    display: none;
+  }
+}
+```
+
+Float
+
+- Keeps item on specified area (i.e. keep aside on right side)
+
+```
+aside {
+  float: right;
+  padding: 3em;
+}
+```
+
+Grid
+
+```
+<div class="container>
+  <div class="card"></div>
+  <div class="card"></div>
+    <div class="card"></div>
+</div>
+
+<style>
+
+
+.container {
+  display: grid;
+  grid-template-columns:
+    repeat(auto-fill, minmax(300px, 1fr));
+  grid-auto-rows: 300px;
+  grid-gap: 1em;
+}
+
+</style>
+```
+
+Flex
+
+- Allows nesting, flexibility
+- HTML holds the pieces
+
+```
+body {
+  display: flex;
+
+  /* spread from the top to the bottom */
+  flex-direction: column;
+
+  margin: 0;
+
+  height: 100vh;
+}
+
+header {
+  flex: 0 80px;
+}
+
+footer {
+  flex: 0 30px;
+}
+
+main {
+  flex: 1;
+
+  /* children inside main element will also flex */
+  display: flex;
+  flex-direction: row;
+}
+
+```
+
+children under a flex will need an associated number
+
+- total number will cut page up into equal sized portions and divy them up based on specifications
+  - i.e. 1,3,1 gives 1/5 of page to first child, 3/5 to second child, 1/5 to third child
+
+media queries help have flex element with unchanging size until the viewport has reached certain size at which time they disappear
+
+</details>
+
+<details>
+
+<summary>CSS Frameworks</summary>
+
+Package of common patterns
+
+- Bootstrap is most common
+- Predefined CSS files
+
+How to include:
+
+```
+<head>
+...
+  <link rel="stylesheet"
+  href = "Link.css"
+/>
+
+<body>
+  ...
+  <script
+    src"Link.js"
+  ></script>
+</body>
+
+```
+
+Bootstrap styled button
+
+```
+<button type="button" class="btn btn-primary">Bootstrap</button>
+```
 
 </details>
 
