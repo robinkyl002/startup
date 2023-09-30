@@ -281,6 +281,14 @@ canvas
   - br element is like newline, pushes to the next line
 - The class attribute allows you to make changes to all elements of the same type
 
+#### Startup HTML
+
+- to use a button to access another page on your site, use the following code
+
+```
+<button type="button" onclick"window.location.href='page.html'">
+```
+
 ## CSS
 
 ### Class Notes
