@@ -289,6 +289,17 @@ canvas
 <button type="button" onclick"window.location.href='page.html'">
 ```
 
+Creating an ellipse in HTML
+
+- You can also create circles and other shapes
+
+```
+<svg height="400" width="400">
+<circle cx="150" cy="150" r="100" stroke="gray"
+  stroke-width="2" fill="green" />
+</svg>
+```
+
 ## CSS
 
 ### Class Notes

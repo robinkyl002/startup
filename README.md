@@ -37,4 +37,15 @@ Have you ever gone down a rabbit hole when you tried to search something up on y
 - WebSocket - The program casts the three highest scores to all players while they are playing
 - React - Web framework
 
-## HTML
+## HTML Deliverables
+
+- HTML - Gave structure on all 5 HTML pages and prepared it for injection of other technologies
+- Links - Put in links between pages to help navigate the site
+- Styling - Put in classes and IDs for some elements that can be modified with CSS. Added some inline styling to a couple of elements.
+- Images - Added rabbit image as an icon and at the top to be paired with the site name.
+- Web Service - Created placeholders for backend service with endpoints for:
+  - login (on login.html)
+  - rabbit puns/jokes (on end.html)
+- Database - scores.html will pull data from the database. login.html will pull log in data
+- Login - Created structure for login.html that has placeholders for elements used to sign in.
+- WebSocket - Placeholder put in for the program to cast the three highest scores to all players while they are playing
