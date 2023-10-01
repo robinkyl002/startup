@@ -254,7 +254,9 @@ canvas
 
   - Use the following deployment script making sure to give the right path to the key
 
-    - `  ./deployFiles.sh -k ~/keys/key.pem -h rabbitholes.click -s simon`
+    ```
+    ./deployFiles.sh -k ~/keys/key.pem -h rabbitholes.click -s simon
+    ```
 
 - The Document Object Model is critical to understanding how the page is setup.
 - Don't be afraid to create several layers of tags inside of other tags if that is what is needed for the structure
