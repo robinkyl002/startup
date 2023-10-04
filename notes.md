@@ -667,7 +667,86 @@ Bootstrap styled button
 
 </details>
 
+#### October 3 Class - Simon CSS
+
+- Use bootstrap framework to supplement design
+- Many challenging designs are already included in bootstrap
+
 ## JavaScript
+
+### Assignments
+
+### Class Notes
+
+#### October 3 Class - JavaScript (JS) Intro
+
+- JavaScript is for behavior/computation
+- Manipulates the DOM
+- Helps maintain portions of the DOM between different pages
+- JavaScript is built into Chrome and can be used on a local machine
+
+Playgrounds
+
+- CodePen
+- VS Code
+- Browser
+- Node.js
+
+<details>
+
+<summary>Putting out "Hello world"</summary>
+
+```
+// Puts it out to the console
+console.log('Hello' + ' ' + 'world');
+
+
+// Using action on list and lambda function
+const words = ['hello', 'world'];
+
+// Throw away function takes each word and puts it out to the console. Method on the object
+words.forEach((word) => {
+  console.log(word);
+});
+
+//Use regular function
+function join(a, b) {
+  return a + ' ' + b;
+}
+
+console.log(join('Hello', 'world'));
+```
+
+</details>
+
+<details>
+
+<summary>Add JS to HTML</summary>
+
+```
+<head>
+  <script src="index.js"> </script>
+</head>
+<body>
+  <script>
+    function sayGoodbye () {
+      alert('Goodbye');
+    }
+  </script>
+  <button onclick="sayHello()">Say Hello</button>
+  <button onclick="sayGoodbye()">Say Goodbye</button>
+  <button onclick="let i=1;i++;console.log(i)">press me</button>
+</body>
+```
+
+</details>
+
+JavaScript Walkthrough
+
+- use strict
+  - Keeps you from doing messy things with variables
+  - Don't use var, use let (for something that can be changed) or const (for something that cannot be changed)
+  - Tells you if you are doing something illegal
 
 ## Web Service
 
