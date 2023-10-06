@@ -748,6 +748,121 @@ JavaScript Walkthrough
   - Don't use var, use let (for something that can be changed) or const (for something that cannot be changed)
   - Tells you if you are doing something illegal
 
+#### October 5 Class - Functions, Objects, Classes
+
+JavaScript Walkthrough
+
+- JS is weakly typed language
+- variables are not restricted to one type (variable that was a number can be redefined as string)
+- JS will automatically convert certain types if you add different types together
+- Seems to favor strings
+
+- === is strict equality
+- == sort of equality (0 == false will work, but 0 === false will return false)
+  - close enough to same value
+
+falsy
+
+- (0, -0, ' ', NaN, null, undefined)
+- truthy = !falsy
+
+```
+for (let i = 1; i < 3; i++) {
+  // Prints out for and then each number
+  // Backticks, $ and brackets important around something being evaluated
+  console.log(`for ${i}`);
+};
+
+```
+
+<details>
+
+<summary>Functions</summary>
+
+Anonymous function:
+
+```
+let f = function (i) {
+  return i;
+};
+
+console.log(f(3));
+```
+
+Optional parameters need default values
+
+```
+let f = function (a, b, c = 'rat') {
+  return [a, b, c];
+};
+
+console.log(f(1));
+
+// returns [1, undefined, 'rat']
+```
+
+Arrow Functions
+
+- Anonymous functions
+  - shorthand
+  - Don't need parentheses if you only need one parameter
+  - If there are no parameters or multiple parameters you need parentheses
+
+```
+// If no braces are used, whatever is on other side of arrow is returned
+const arrow = () => 1;
+
+// Will not return anything
+const arrowWithBlock(a) => {
+  a;
+};
+
+// Will return a
+const arrowWithReturn = (a) => {
+  return a;
+};
+```
+
+Closures
+
+- A function and its surrounding state
+- Function returns function
+- Keeps
+
+```
+function dup (i, sep = ':') {
+  let dupLimit = i;
+
+  return (t) => {
+    let dupCount = dupLimit;
+    let out = t;
+    while (dupCount-- > 1) {
+      out += sep + t;
+    }
+    return out;
+  };
+};
+
+// Returns inner function that results from passing in 4 to outer function;
+const duplicate4 = dup(4);
+
+```
+
+</details>
+
+<details>
+
+<summary>Objects</summary>
+
+
+</details>
+
+<details>
+
+<summary>Classes</summary>
+
+</details>
+
 ## Web Service
 
 ## Database
