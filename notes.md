@@ -672,6 +672,12 @@ Bootstrap styled button
 - Use bootstrap framework to supplement design
 - Many challenging designs are already included in bootstrap
 
+### Assignments
+
+Flex
+
+- using flex
+
 ## JavaScript
 
 ### Assignments
@@ -850,10 +856,90 @@ const duplicate4 = dup(4);
 
 </details>
 
+#### October 10 Class - Closures, Regex, Template Literals
+
+Closures
+
+- Majority of notes in previous class notes
+- Function in previous notes will go through and
+- Closure associates function inside of used function with a variable, allowing the inside function to be used later
+
+```
+// variable remembers that 4 was passed in
+// so you can use duplicate4 multiple times and get the same output
+const duplicate4 = dup(4);
+
+// using variable name
+console.log(duplicate4('hello'));
+// returns hello:hello:hello:hello
+
+
+// using outer function directly
+console.log(dup(3)('again'));
+//returns again:again:again
+```
+
+Event listener
+
+- window is DOM element
+- specific events are picked to trigger an action
+- events are defined in JS already (i.e. scroll, click, etc.)
+- need as parameters an event and a function to run
+-
+
+```
+function debounce (windowMs, windowFunc) {
+  let callCount = 0;
+  let timeout;
+  return function () {
+    // change color as the user scrolls
+    const color = `hsl(${callCount++}, 100%, 50%)`;
+    document.querySelector("body").style.backgroundColor = color;
+
+    // reset time
+    clearTimeout(timeout);
+
+    // call windowFunc after time given in windowMs
+    // will change back to white after time has passed
+    timeout = setTimeout(() => windowFunc, windowMs);
+  };
+}
+
+window.addEventListener (
+  "scroll",
+  debounce (500, () => {
+    // Look for selector "body" then style with white background color
+    documentquerySelector("body").style.backgroundColor = "FFFFFF";
+  })
+);
+```
+
+Template Literals
+
+- Multiple line strings
+- variables inside of a string that can be filled in later
+- use back tick "`"
+
+```
+let header = "Things I like: ";
+let tags = ["waffles", "cheese", "onions"];
+
+let html = `<h2>${header}</h2><ul>`;
+
+// Creating list items and appending it to the HTML that will be added
+for (const x of tags) {
+  html += `<li>${x}</li>`;
+}
+
+html += `</ul>`;
+
+document.getElementById("demo").innerHTML = html;
+
+```
+
 <details>
 
 <summary>Objects</summary>
-
 
 </details>
 
