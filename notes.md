@@ -1142,6 +1142,8 @@ console.log('array return: ', x, y, z);
 
 </details>
 
+#### October 17 Class
+
 <details>
 
 <summary>Classes</summary>
