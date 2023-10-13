@@ -885,7 +885,6 @@ Event listener
 - specific events are picked to trigger an action
 - events are defined in JS already (i.e. scroll, click, etc.)
 - need as parameters an event and a function to run
--
 
 ```
 function debounce (windowMs, windowFunc) {
@@ -937,9 +936,209 @@ document.getElementById("demo").innerHTML = html;
 
 ```
 
+#### October 12 Class - Objects/Classes, JSON, DOM, etc.
+
 <details>
 
 <summary>Objects</summary>
+
+**Strings**
+
+Functions
+
+- s.toUppercase()
+- s.toLowerCase()
+- s.split(' ') split string whenever this delimiter is found
+- s.endsWith('string') (boolean)
+- s.replace('x', 'y') replace x with y
+- s.slice(3,7) cut out section between these accesses
+
+**Arrays**
+
+```
+
+// iterate over array
+
+//using of accesses values
+//in gives keys
+
+for (let entry of numbers) {
+  console.log(entry);
+  if (entry == 3) break;
+}
+
+for (let entry in numbers) {
+  console.log(entry);
+}
+
+// applies function to apply to each entry in array
+console.log (
+  'map',
+  numbers.map((n) => n * 100)
+);
+
+// combines array into sinqle value based on function
+console.log (
+  'reduce',
+  numbers.reduce((p, c) => p + c)
+);
+
+// keeps elements that don't return true for function
+console.log (
+  'filter',
+  numbers.filter((n) => n % 2)
+);
+
+// returns true if something in array meets the condition
+console.log (
+  'some',
+  numbers.some((n) => n > 5)
+);
+
+```
+
+**Objects**
+
+```
+// brace indicates object
+let obj = {
+  animal: 'fish',
+};
+
+// adds value count: 3
+obj.count = 3;
+
+// can add object to other object
+obj.location = {
+  cities: ['utah', 'new york'],
+  origin: 'ocean',
+};
+
+// returns value associated with animal then text live in
+// then uses array function join to grab utah and new york and join
+// them with the string ' and '
+// output would be "fish live in utah and new york"
+obj.print = function () {
+  return `${this.animal} live in ${this.location.cities.join(' and ')}`;
+}
+
+console.log(obj);
+console.log(obj.animal);
+console.log(obj.print());
+
+// iterator of properties
+// gives us key and then value associated with the key
+for (const property in obj) {
+  console.log(`name:${property}, value:${obj[property]}`)
+}
+
+
+```
+
+**Spread and Rest**
+
+```
+// spread
+// take array and spread out into pieces
+
+let input = [1,2,3];
+// separates the values of original array to keep array
+// from being an array and then three individual values
+input = [...input, 4, 5, 6];
+console.log(input);
+
+// can do with object
+let base = { a: 'rat', b: 'cat'};
+
+// Treats info in base as individuals not entire object
+console.log({c: 'dog', ...base, d: 'bird' });
+
+// rest
+// takes individual values and puts them in an array
+const sumAndMultiply (multiplier, ...numbers) => {
+  console.log(numbers);
+  return numbers.reduce((a, n) => a + multiplier * n);
+};
+
+console.log(sumAndMultiply(10, ...input, 7, 8));
+
+```
+
+**Destructuring Arrays**
+
+Taking pieces out of something
+
+```
+let x, y, z;
+
+const a = [1, 2];
+x = a;
+console.log(x);
+
+// returns 1
+[x] = a;
+console.log(x);
+
+// returns "1, 2"
+[x, y] = a;
+console.log(x, y);
+
+// 1, 2, undefined
+[x, y, z] = a;
+console.log(x, y, z);
+
+// 1, 2, 100
+[x, y, z=100] = a;
+console.log(x, y, z);
+
+// returns 1, 3, [4, 5, 6, 7]
+[x, , y, ...z] = [1, 2, 3, 4, 5, 6, 7];
+console.log(x, y, z);
+
+```
+
+**Destructuring Parameters**
+
+```
+// default values of 3 and 'taco'
+// values set from array passed in
+function af([a = 3, b = 'taco'] = []) {
+  console.log(a, b);
+}
+
+// prints out 3, taco
+af();
+
+// prints out 20, taco
+af([20]);
+
+// using equal sign for parameters because of
+// destructuring the parameters
+function of({a = 3, b = {animal: 'rat'}} = {}) {
+  console.log(`a: ${a} b: ${b.animal}`);
+}
+
+// returns a: 10 b: rat
+of({a: 10});
+
+// returns a: 3 b: dog
+of({b: { animal: 'dog'}});
+```
+
+**Destructuring Returns**
+
+```
+function of({a = 3, b = 'rat'} = {}) {
+  return [a, b, 'cat'];
+}
+
+const [x, y, z] = af({a: 10});
+// returns "array return: 10 rat cat"
+console.log('array return: ', x, y, z);
+
+
+
+```
 
 </details>
 
