@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <header>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Rabbit Holes</title>
+        <link rel="icon" href="rabbit.jpg" />
+    </header>
+    <body>
+        <header>
+            <img src="rabbit.jpg" width="5%" height="5%">
+            <h1>Rabbit Holes</h1>
+        
+        <!--Navigation bar to access scores, play, go home or log in/out -->
+        <nav>
+            <menu>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="play.html">Play</a></li>
+                <li><a href="scores.html">Scores</a></li>
+                <li><a href="login.html">Log in</a></li>
+            </menu>
+        </nav>
+            
+        <hr />
+        </header>
+        
+        <main>
+            <div style="background-color:#AADFEF">
+                <h1>Pick a hole to search!</h1>
+                <div class="players">
+                    Current player:
+                    <span class="player-name">The Wolverine</span>
+                    <br />
+                    <span class="score">Score: 21</span>
+                    <br />
+                    <span id="round">Round: 4</span>
+                  </div>
+                  <h3>Top 3 scores:</h3>
+                  <ul class="notification">
+                    <li class="player-name">Steve: 48</li>
+                    <li class="player-name">Bucky: 43</li>
+                    <li class="player-name">Leo: 42</li>
+                  </ul>
+                <canvas id="playsky" width="window" height="100"></canvas>
+            </div>
+            <div style="background-color:#4EA652">
+                <svg class="rabbithole" width="32vw" height="80vh">
+                    <ellipse cx="60%" cy="400" rx="80" ry="40" style="fill:#543818"></ellipse>
+                </svg>
+                <svg class="rabbithole" width="32vw" height="80vh">
+                    <ellipse cx="50%" cy="200" rx="80" ry="40" style="fill:#543818"></ellipse>
+                </svg>
+                <svg class="rabbithole" width="32vw" height="80vh">
+                    <ellipse cx="40%" cy="400" rx="80" ry="40" style="fill:#543818"></ellipse>
+                </svg>
+            </div>
+            <button type="button" onclick="window.location.href='end.html'">Confirm choice</button>
+            <br />
+        </main>
+        
+        <footer>
+            <hr />
+            <span>Kyle Robinson</span>
+            <br />
+            <!-- Link to GitHub -->
+            <a href="https://github.com/robinkyl002/startup">GitHub</a>
+        </footer>
+    </body>
+</html>
