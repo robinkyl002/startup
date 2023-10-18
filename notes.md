@@ -1142,7 +1142,191 @@ console.log('array return: ', x, y, z);
 
 </details>
 
-#### October 17 Class
+#### October 17 Class - Promises, Async, Await
+
+**Placement of script tag in HTML**
+
+- In head
+  - Reads JS file before looking at the body
+- bottom of body
+  - allows it to put all of the DOM in place, then make any changes from JS file
+
+**Multithreading**
+
+- not available in JS
+- Moves portion of code that will take a while to another thread to run parallel
+- Method for doing this in JS is called Promise
+
+**Promise**
+
+- Function that will eventually be resolved, but gives a state (i.e. pending, successful, failed)
+- pending -> Push to waiting until space opens up to continue computing
+- Asynchronous -> working on multiple things while waiting for things to come back
+- Things don't always finish in the same order entered
+
+```
+const THRESHOLD_A = 8;
+let promiseCount = 0;
+
+function getNumber(resolve, reject) {
+  setTimeout (() => {
+    const randomInt = Date.now();
+    const value = randomInt % 10;
+    if (value < THRESHOLD_A) {
+      // return value
+      resolve(value);
+    } else {
+      // reject with this message
+      reject(`Too large: ${value}`);
+    }
+  }, Math.random() * 2000 + 1000);
+  //random returns between 0 and 1
+}
+
+function determinParity (value) {
+  const isOdd = value % 2 === 1;
+  return { value, isOdd };
+}
+
+function troubleWithGetNumber(reason) {
+  const err = new Error("Trouble getting number", {cause: reason});
+  //Allows access to error after function is run
+  console.error(err);
+  // throwing error prevents testPromise from thinking it was successful
+  throw err;
+}
+
+function promisGetWord(parityInfo) {
+  return new Promise((resolve, reject) => {
+    const { value, isOdd } = parityInfo;
+    if (value >= THRESHOLD_A - 1) {
+      // fail promise with message "Still too large: value"
+      reject(`Still too large: ${value}`);
+    }
+    else {
+      // if isOdd is true, set parityInfo.wordEvenOdd to be "odd"
+      // otherwise set it to be "even"
+      // adding new key-value pair to parityInfo object called wordEvenOdd
+      parityInfo.wordEvenOdd = isOdd ? "odd" : "even";
+      resolve(parityInfo);
+    }
+  });
+}
+
+function testPromise() {
+  const thisPromiseCount = ++promiseCoount;
+  const log = document.getElementById("log");
+  //inserting this HTML into element
+  log.inserAdjacentHTML( "beforeend", `${thisPromiseContent}) Started<br>`);
+
+  // Need to use new so that it will create a new object
+  // because a promise cannot be reused
+  // it only takes one use
+  // calls constructor for promise
+  new Promise(getNumber)
+    // call determineParity if returns success, troubleWithGetNumber if fails
+    .then(determineParity, troubleWithGetNumber)
+    //If fails cascades down and is caught by catch
+    .then(promiseGetWord)
+    .then((info) => {
+      // what we do when it succeeds
+      log.insertAdjacentHTML("beforeend", `${thisPromiseCount}) Got: ${info.value}, ${info.wordEvenOdd}<br>`);
+      return info;
+    })
+    // what we do when it fails
+    .catch((reason) => {
+      if (reason.cause) {
+       log.insertAdjacentHTML("beforeend", `${thisPromiseCount}) Had previously handled error.<br>`);
+      }
+      else {
+        log.insertAdjacentHTML("beforeend", `${thisPromiseCount}) Trouble with promiseGetWord(): ${reason}<br>`);
+      }
+    })
+    // what we do whether it fails or succeeds
+    .finally((info) => log.insertAdjacentHTML("beforeend", `${thisPromiseCount}) Promise Complete<br><br>`));
+  }
+}
+
+const btn = document.getElementById("make-promise");
+btn.addEventListener("click", testPromise);
+```
+
+**Async/Await**
+
+- Performs same function as previous program
+- await can only be used in function if function is designated as async
+- await tells the function that it may take a while but it will complete, don't throw an error
+
+```
+const THRESHOLD_A = 8;
+let promiseCount = 0;
+
+function getNumber(resolve, reject) {
+  setTimeout (() => {
+    const randomInt = Date.now();
+    const value = randomInt % 10;
+    if (value < THRESHOLD_A) {
+      // return value
+      resolve(value);
+    } else {
+      // reject with this message
+      reject(`Too large: ${value}`);
+    }
+  }, Math.random() * 2000 + 1000);
+  //random returns between 0 and 1
+}
+
+function determinParity (value) {
+  const isOdd = value % 2 === 1;
+  return { value, isOdd };
+}
+
+function promisGetWord(parityInfo) {
+  return new Promise((resolve, reject) => {
+    const { value, isOdd } = parityInfo;
+    if (value >= THRESHOLD_A - 1) {
+      // fail promise with message "Still too large: value"
+      reject(`Still too large: ${value}`);
+    }
+    else {
+      // if isOdd is true, set parityInfo.wordEvenOdd to be "odd"
+      // otherwise set it to be "even"
+      // adding new key-value pair to parityInfo object called wordEvenOdd
+      parityInfo.wordEvenOdd = isOdd ? "odd" : "even";
+      resolve(parityInfo);
+    }
+  });
+}
+
+async function testPromise() {
+  const thisPromiseCount = ++promiseCoount;
+  const log = document.getElementById("log");
+  //inserting this HTML into element
+  log.inserAdjacentHTML( "beforeend", `${thisPromiseContent}) Started<br>`);
+
+  try {
+    const number = await new Promise(getNumber);
+    try {
+      const parity = await determineParity(number);
+      const info = await promiseGetWord(parity);
+      await log.insertAdjacentHTML("beforeend", `${thisPromiseCount}) Got: ${info.value}, ${info.wordEvenOdd}<br>`);
+    }
+    catch (reason) {
+      log.insertAdjacentHTML("beforeend", `${thisPromiseCount}) Trouble with promiseGetWord(): ${reason}<br>`);
+    }
+  }
+  catch (reason) {
+    console.error("Trouble getting number");
+    log.insertAdjacentHTML("beforeend", `${thisPromiseCount}) Had previously handled error.<br>`);
+  }
+  finally {
+    log.insertAdjacentHTML("beforeend", `${thisPromiseCount}) Promise Complete<br><br>`));
+  }
+}
+
+const btn = document.getElementById("make-promise");
+btn.addEventListener("click", testPromise);
+```
 
 <details>
 
