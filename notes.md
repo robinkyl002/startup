@@ -1328,11 +1328,157 @@ const btn = document.getElementById("make-promise");
 btn.addEventListener("click", testPromise);
 ```
 
+#### October 19 Class - Classes, JSON, DOM, LocalStorage
+
 <details>
 
 <summary>Classes</summary>
 
+```
+// base class
+class Location {
+  // class level variable
+  // cannot be accessed from object of type Location
+  static defaultPlace = 'east';
+
+  // constructor will set location to location passed in or default value
+  constructor(location) {
+    this.location = location || Location.defaultPlace;
+  }
+}
+
+// derived class inherits from other class
+class Beach extends Location {
+  constructor(name, location, weather = 'sunny') {
+    // super calls constructor from Location class
+    super(location);
+    this.name = name;
+    // underscore tells code to treat variable as private
+    // outdated way to do it; use #
+    this._weather = weather;
+  }
+
+  get weather () {
+    return this._weather;
+  }
+
+  set weather () {
+    this._weather = weather;
+  }
+}
+
+const sunsetBeach = new Beach('Sunset', 'north', 'rainy');
+// get function will always be used on right side of a definition
+// set function will always be on the left side and set to a different value
+sunsetBeach.weather = 'snowing';
+const beaches = [sunsetBeach, new Beach('Kailua')];
+
+// Kailua puts out "Sunny weather at Kailua beach on the east shore"
+for (let beach of beaches) {
+  console.log(`${beach.weather} weather at ${beach.name} beach on the ${beach.location} shore`);
+}
+
+```
+
 </details>
+
+**JSON**
+
+- sending or asking for information between applications
+
+```
+const obj = {
+  name: 'tina',
+  alive: true,
+  print: () => `${this.name} is ${this.alive}`,
+};
+
+console.log('object: ', obj);
+
+// converting to JSON removes functions
+const objText = JSON.stringify(obj);
+console.log('json: ', objText);
+console.log('rehydrate: ', JSON.parse(objText));
+
+```
+
+**DOM**
+
+- Document modeled as tree
+- elements are nodes
+
+Manipulation
+
+```
+<html>
+  <body>
+    <p id="t">text1 <span>text2</span></p>
+    <p>text3</p>
+    <script>
+      funtion diplayElement(el) {
+        console.log(el.tagName);
+        for (const child of el.children) {
+          // List of children elements to specified element
+          displayElement(child);
+        }
+      }
+
+      // acting on everything in the document
+      displayElement(document);
+
+      const el = document.querySelector('#t');
+
+      el.innerHTML = '<div class="injected"><b>Hello</b>!</div>';
+
+      function insertChild(selector, text) {
+        const newChild = document.createElement('div');
+        newChild.textContent = text;
+
+        const parentElement = document.querySelector(selector);
+        parentElement.appendChild(newChild);
+      }
+
+      insertChild('#t', 'new course');
+
+      const submitDataEl = document.querySelector('#t');
+
+      submitDataEl.addEventListener('click', function (event) {console.log('clicked')});
+
+    </script>
+  </body>
+</html>
+```
+
+**LocalStorage**
+
+- Use local storage to have data persist between pages
+
+```
+<body>
+  <script>
+    let user = 'Alice';
+
+    let myObject = {
+      name: 'Bob',
+      info: {
+        favoriteClass: 'CS 260';
+        likesCS: true;
+      },
+    };
+
+    let myArray = [1, 'One', true];
+
+    localStorage.setItem('user', user);
+    localStorage.setItem('object', JSON.stringify(myObject));
+    localStorage.setItem('array', JSON.stringify(myArray));
+
+    console.log(localStorage.getItem('user'));
+    console.log(JSON.parse(localStorage.getItem('object')));
+    console.log(JSON.parse(localStorage.getItem('array')));
+
+  </script>
+</body>
+```
 
 ## Web Service
 
