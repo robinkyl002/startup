@@ -1567,6 +1567,12 @@ Manipulation
 </body>
 ```
 
+#### October 24 Class - Simon
+
+JavaScript helps us move from 4 or 5 separate DOMs to having one DOM
+
+- JS inserts into the HTML rather than being explicitly built in HTML
+
 ## Web Service
 
 ## Database
