@@ -1575,6 +1575,162 @@ JavaScript helps us move from 4 or 5 separate DOMs to having one DOM
 
 ## Web Service
 
+### Assignments
+
+### Class notes
+
+#### October 26 Class - URL, Ports, HTTP, Fetch, CORS, Service Design
+
+- Fetch
+  - Method to access web service using JS
+  - returns JSON object and other information about site
+- Endpoints (what your site has to do because other services don't)
+  - Users
+  - Scores
+  - Which choices selected
+- Endpoints may call other services such as a database
+  - Pull high scores
+  - represented by URLs
+
+HTTP uses by default port 80
+
+-v -> verbose (list out what is going on)
+
+curl sends out a request to the server
+
+```
+const r = await fetch ('https://api.quotable.io/random');
+// pulls JSON out of response from fetch
+const j = await r.json();
+console.log(j.value);
+```
+
+Use network tab in console
+
+**URL**
+
+Uniform resource locator
+https://byu.edu:443/api/city?q=pro#3
+
+- scheme - https://
+- domain - byu.edu
+- port - :443
+- pathway - /api/city
+- parameters - ?q=pro
+- anchor - #3
+
+Necessary parts:
+
+- scheme
+- domain
+
+Path tells you where specifically you want to go on the site
+
+Ports
+
+- 22 - SSH
+- 443 - HTTPS
+- 80 - HTTP
+- 20 - File Transfer protocol (FTP)
+
+Caddy listens to port 443 and 80
+
+- redirects to 443 if accessed using 80
+- looks to see if a subdomain is available and redirect to that port if necessary
+
+HTTP for fetch request
+
+- GET is default for fetch request
+- Specify if GET is not what you are doing
+- Accept anything use _/_
+
+```
+method   path            version
+POST /api/city?q=provo HTTP/1.1
+Host: cs260.click
+User-Agent: curl/7.77.0
+Content-Length: 14
+Accept: application/json, text/plain
+
+Body {"name": "tim"}
+```
+
+Methods
+
+- GET
+- POST
+- PUT
+- DELETE
+- OPTIONS
+
+Response
+
+```
+HTTP/1.1 200 OK
+Content-Type
+```
+
+HTTP Status Codes
+2xx: 200 Success, 204 No Content
+3xx: 301/302 redirect, 304 not modified
+4xx (front end): 400 bad request, 404 not found, 403 forbidden, 429 too many requests
+5xx(back end): 500 server error, 503
+
+HTTP content types
+
+Cookies are handled with fetch requests
+
+- save information between sessions on a site (settings, log in info, recently viewed stuff)
+- store server information in local storage rather than having to go back and forth between server to get info
+
+Cache control
+
+- page may already reside on machine or on cache server
+- cache may have timeout for when data might become stale
+
+```
+fetch ('https://jsonplaceholder.typicode.com/posts', {
+  method: 'POST',
+  body: JSON.stringify({
+    title: 'test title',
+    body: 'test body',
+    userID: 1,
+  }),
+  headers: {
+    'Content-type': 'application/json',
+  },
+})
+.then((response) => response.json())
+.then((jsonResponse) => {
+  console.log(jsonReponse);
+});
+
+async function store () {
+  const rs = await fetch ('https://jsonplaceholder.typicode.com/posts', {
+  method: 'POST',
+  body: JSON.stringify({
+    title: 'test title',
+    body: 'test body',
+    userID: 1,
+  }),
+  headers: {
+    'Content-type': 'application/json',
+  },
+});
+console.log(rs);
+const js = await rs.json();
+console.log(js);
+console.log(js.content);
+
+const rg = await fetch ('https://jsonplaceholder.typicode.com/posts');
+console.log(rg);
+const jg = await rg.json();
+console.log(jg);
+console.log(jg[0]);
+
+document.querySelector();
+```
+
 ## Database
 
 ## Login
