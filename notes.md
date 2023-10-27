@@ -769,6 +769,19 @@ console.log(e.print());
 // OUTPUT: My name is Eich. I am a programmer
 ```
 
+#### Local Storage
+
+**Main Functions**
+
+| Function             | Meaning                                      |
+| -------------------- | -------------------------------------------- |
+| setItem(name, value) | Sets a named item's value into local storage |
+| getItem(name)        | Gets a named item's value from local storage |
+| removeItem(name)     | Removes a named item from local storage      |
+| clear()              | Clears all items in local storage            |
+
+A local storage value must be of type string, number, or boolean. If you want to store a JavaScript object or array, then you must first convert it to a JSON string with JSON.stringify() on insertion, and parse it back to JavaScript with JSON.parse() when retrieved.
+
 ### Class Notes
 
 #### October 3 Class - JavaScript (JS) Intro
