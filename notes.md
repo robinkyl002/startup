@@ -1754,6 +1754,56 @@ JavaScript helps us move from 4 or 5 separate DOMs to having one DOM
 
 - JS inserts into the HTML rather than being explicitly built in HTML
 
+## Midterm notes
+
+### Console commands
+
+| chmod | change permissions to read, right, execute |
+| pwd | output path to working directory/current folder |
+| cd | change directory (file) |
+| ls | list files in current folder |
+| vim | console editor for editing code |
+| nano | text editor |
+| mkdir | create folder/directory |
+| mv | move |
+| rm | remove |
+| man | display user manual for commands in terminalw |
+| ssh | secure shell - secure log in to remote machine and execute commands |
+| ps | status of active processes |
+| wget | download files and interact with REST APIs |
+| sudo | perform action as administrator/superuser |
+| ls -la | list all files, including hidden files |
+
+### DOM
+
+### HTML
+
+span element has default CSS diplay property value of nothing
+
+### CSS
+
+- Box model (inside to outside)
+  - content
+  - padding
+  - border
+  - margin
+  - position
+
+### JavaScript
+
+- Correct syntax for creating object
+
+```
+let obj = {
+  a: 'jake',
+  b: 'hey guys',
+  m: 12
+}
+```
+
+for/in - use to loop through properties of an object
+for/of - use to loop through values of an iterable object
+
 ## Web Service
 
 ### Assignments
