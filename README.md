@@ -49,3 +49,9 @@ Have you ever gone down a rabbit hole when you tried to search something up on y
 - Database - scores.html will pull data from the database. login.html will pull log in data
 - Login - Created structure for login.html that has placeholders for elements used to sign in.
 - WebSocket - Placeholder put in for the program to cast the three highest scores to all players while they are playing
+
+## CSS Deliverables
+
+- Header and footer modified with Bootstrap and additional styling to make it look more modern
+- Backgrounds resized to fit the screen
+- Text colors changed to show up on the background
