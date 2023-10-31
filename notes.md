@@ -1962,6 +1962,155 @@ console.log(jg[0]);
 document.querySelector();
 ```
 
+#### October 31 Class - CORS, Design, Node.js, Express
+
+HTTP - send a request, receive a response (enables communication)
+fetch () - JavaScript method for doing HTTP (default is GET)
+
+Cross site request forgery
+wellsfargo.com / welsfargo.com
+
+- Possible for websites to get something from your site using GET, allowing access to someone's account
+
+Same origin policy
+
+- origin: wellsfargo.com
+- only allow fetch to: wellsfargo.com
+  - only fulfills requests from that site/server
+- creates issues if you want to fetch data from other web services
+
+**CORS**
+
+White list specific addresses
+
+```
+GET /api/auth/login HTTP/2
+Host: wellsfargo.com
+Origin: https://welsfargo.com
+
+HTTP/2 200 OK
+
+```
+
+```
+//Request
+Host: cs260.click //request to
+Origin: https://hacker.click //origin of request
+
+//Reject Response
+Access-Control-Allow-Origin: https://cs260.click //allowed from
+Access-Control-Allow-Methods: GET, PUT, POST, DELETE
+
+//Allow Response
+Access-Control-Allow-Origin: https://hacker.click
+Access-Control-Allow-Methods: *
+
+```
+
+Caddy CORS/Caching Settings
+
+```
+startup.yourdomainhere {
+  reverse_proxy * localhost: 4000
+  header Cache-Control no-store //don't store cache
+  header -server
+  header -etag
+
+}
+```
+
+**Service Design**
+
+- Look at how your application will be used and design a path of the interactions between individual and server
+- Think about it as methods on objects
+- For simon
+  - Create account
+  - Log in
+  - Log out
+  - get user
+  - get scores
+  - save scores
+- Think in terms of protocols and JSON
+  - Transfer protocols - HTTP, HTTPS, UDP
+  - HTTP verbs - GET, PUT, POST, DELETE
+
+**Node.js**
+
+- Engine that runs JavaScript in the console
+- allows you to use JavaScript on back end and not just front end
+- Parts
+  - NVM - Node version manager (download and keep up to date)
+  - Node - JavaScript runtime
+  - NPM - Node Package manager (use to import available code in the expansive library)
+
+```
+function countdown () {
+  let i = 0;
+  while (i++ < 5) {
+    console.log (`Counting ... ${i}`);
+    document.querySelector('#display').innerHTML += `Counting ... ${i}`;
+  }
+}
+countdown();
+```
+
+Create folder, go into it, tell the folder that it needs to download and track what is in there
+
+```
+mkdir npmtest
+cd npmtest
+npm init -y
+```
+
+Creates new files in folder
+
+- package.json
+- package-lock.json
+- node_modules
+
+node_modules can get really big, so add to git ignore to avoid creating a bunch of copies of it.
+
+```
+// require accessing that endpoint
+// require tells code to import data from service
+const giveMeAJoke = require('give-me-a-joke');
+
+giveMeAJoke.getRandomDadJoke((joke) => {
+  console.log(joke);
+});
+```
+
+create index.js that will allow things to be grabbed from it
+set up server or machine to listen for calls on a certain port, then fulfill certain
+
+```
+const http = require('http');
+//create server with specified functionality
+// need request object and response object passed in
+// will also need next if there is chain of requests
+const server = http.createServer(function (req, res) {
+  // 200 code for all good, create HTML file
+  res.writeHead(200, {'Content-Type': 'text/html'});
+
+  res.write('<h1>Hello Node.js [${req.method}] ${req.url}</h1>');
+  res.end();
+});
+
+server.listen(8080, () => {
+  console.log('Web service listeneing on port 8080);
+});
+```
+
+Above code will always put out GET as the default unless you use fetch() to change the method
+
+Run node on file using `node filename`
+
+- Keeps it open until the process is terminated
+
+Don't use live server through VS code to create own local server
+
+- Run server code through VS Code console using node.js
+
 ## Database
 
 ## Login
