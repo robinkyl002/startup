@@ -1,0 +1,22 @@
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.navigation {
+    flex: 0 80px;
+}
+main {
+    flex: 1 calc(100vh - 120px);
+    text-align: center;
+    background-color: lightblue;
+    /* background-size: 800px 800px; */
+    /* height: 75vh; */
+    padding: 35vh 35vh;
+    
+}
+
+footer {
+    flex: 0 40px;
+    background-color: lightgray;
+}
