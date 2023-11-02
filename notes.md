@@ -1808,6 +1808,81 @@ for/of - use to loop through values of an iterable object
 
 ### Assignments
 
+#### URL
+
+Example
+`https://byu.edu:443/cs/260/student?filter=accepted#summary`
+
+Syntax:
+`<scheme>://<domain name>:<port>/<path>?<parameters>#<anchor>`
+
+| Part        | Example                              | Meaning                                                                                                                                                                                                                                                                             |
+| ----------- | ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Scheme      | https                                | The protocol required to ask for the resource. For web applications, this is usually HTTPS. But it could be any internet protocol such as FTP or MAILTO.                                                                                                                            |
+| Domain name | byu.edu                              | The domain name that owns the resource represented by the URL.                                                                                                                                                                                                                      |
+| Port        | 3000                                 | The port specifies the numbered network port used to connect to the domain server. Lower number ports are reserved for common internet protocols, higher number ports can be used for any purpose. The default port is 80 if the scheme is HTTP, or 443 if the scheme is HTTPS.     |
+| Path        | /school/byu/user/8014                | The path to the resource on the domain. The resource does not have to physically be located on the file system with this path. It can be a logical path representing endpoint parameters, a database table, or an object schema.                                                    |
+| Parameters  | filter=names&highlight=intro,summary | The parameters represent a list of key value pairs. Usually it provides additional qualifiers on the resource represented by the path. This might be a filter on the returned resource or how to highlight the resource. The parameters are also sometimes called the query string. |
+| Anchor      | summary                              | The anchor usually represents a sub-location in the resource. For HTML pages this represents a request for the browser to automatically scroll to the element with an ID that matches the anchor. The anchor is also sometimes called the hash, or fragment ID.                     |
+
+**URL, URN, URI**
+
+You will sometimes hear the use of URN or URI when talking about web resources. A Uniform Resource Name (URN) is a unique resource name that does not specify location information. For example, a book URN might be urn:isbn:10,0765350386. A Uniform Resource Identifier (URI) is a general resource identifier that could refer to either a URL or a URN. With web programming you are almost always talking about URLs and therefore you should not use the more general URI.
+
+#### Ports
+
+Port numbers allow a single device to support multiple protocols (e.g. HTTP, HTTPS, FTP, or SSH) as well as different types of services (e.g. search, document, or authentication). The ports may be exposed externally, or they may only be used internally on the device. For example, the HTTPS port (443) might allow the world to connect, the SSH port (22) might only allow computers at your school, and a service defined port (say 3000) may only allow access to processes running on the device.
+
+The internet governing body, IANA, defines the standard usage for port numbers. Ports from 0 to 1023 represent standard protocols. Generally a web service should avoid these ports unless it is providing the protocol represented by the standard. Ports from 1024 to 49151 represent ports that have been assigned to requesting entities. However, it is very common for these ports to be used by services running internally on a device. Ports from 49152 to 65535 are considered dynamic and are used to create dynamic connections to a device. Here is the link to IANA's registry.
+
+Common ports:
+
+| Port | Protocol                                                                                           |
+| ---- | -------------------------------------------------------------------------------------------------- |
+| 20   | File Transfer Protocol (FTP) for data transfer                                                     |
+| 22   | Secure Shell (SSH) for connecting to remote devices                                                |
+| 25   | Simple Mail Transfer Protocol (SMTP) for sending email                                             |
+| 53   | Domain Name System (DNS) for looking up IP addresses                                               |
+| 80   | Hypertext Transfer Protocol (HTTP) for web requests                                                |
+| 110  | Post Office Protocol (POP3) for retrieving email                                                   |
+| 123  | Network Time Protocol (NTP) for managing time                                                      |
+| 161  | Simple Network Management Protocol (SNMP) for managing network devices such as routers or printers |
+| 194  | Internet Relay Chat (IRC) for chatting                                                             |
+| 443  | HTTP Secure (HTTPS) for secure web requests                                                        |
+
+Your ports:
+
+As an example of how ports are used we can look at your web server. When you built your web server you externally exposed port 22 so that you could use SSH to open a remote console on the server, port 443 for secure HTTP communication, and port 80 for unsecure HTTP communication.
+
+Caddy is listening on ports 80 and 443. When Caddy gets a request on port 80, it automatically redirects the request to port 443 so that a secure connection is used. When Caddy gets a request on port 443 it examines the path provided in the HTTP request (as defined by the URL) and if the path matches a static file, it reads the file off disk and returns it. If the HTTP path matches one of the definitions it has for a gateway service, Caddy makes a connection on that service's port (e.g. 3000 or 4000) and passes the request to the service.
+
+Internally on your web server, you can have as many web services running as you would like. However, you must make sure that each one uses a different port to communicate on. You run your Simon service on port 3000 and therefore cannot use port 3000 for your startup service. Instead you use port 4000 for your startup service. It does not matter what high range port you use. It only matters that you are consistent and that they are only used by one service.
+
+#### HTTP
+
+See HTTP exchange using `curl`
+`curl -v -s http://info.cern.ch/hypertext/WWW/Helping.html`
+
+**HTTP Request:**
+
+```
+GET /hypertext/WWW/Helping.html HTTP/1.1
+Host: info.cern.ch
+Accept: text/html
+```
+
+General Request:
+
+```
+<verb> <url path, parameters, anchor> <version>
+[<header key: value>]*
+[
+
+  <body>
+]
+
+```
+
 ### Class notes
 
 #### October 26 Class - URL, Ports, HTTP, Fetch, CORS, Service Design
@@ -2110,6 +2185,65 @@ Run node on file using `node filename`
 Don't use live server through VS code to create own local server
 
 - Run server code through VS Code console using node.js
+
+#### November 2 Class - Express, debugging, daemons
+
+**Express**
+
+Create URLs that connect path to specific code
+
+Cookies send info back and forth between server to keep session up
+Local storage is used by browser so it doesn't need to reach back to server as often
+
+- express - constructor and default middleware (i.e. authentication, cookies)
+- app - express application (info about app)
+- req - request object
+- res - response object
+- route - adding child routing
+
+create new node
+
+```
+npm init -y
+npm install express
+
+const express = require('express');
+const app = express();
+
+app.get('*', (req, res) => {
+  res.send('<h1>Hello Express!<h1>');
+});
+```
+
+syntax
+`app.use([path] callback(req, res, next))`
+
+pull from public directory to when people request page
+`app.use(express.static('public'));`
+
+access somewhere else with response
+`app.get('/api/scores', (req, res) => {res.send([1,2,3])});`
+
+use colon before part of path to indicate that value could vary
+pass in value entered
+
+```
+app.get('/store/:id/:time', (req, res) => {
+  res.send({id: req.params.id, time: req.params.time});
+});
+```
+
+Order Matters!! functions run in the order placed.
+
+final function should use res.send(...)
+
+**Daemons - PM2**
+program that keeps backend (node) running
+
+```
+pm2 ls
+cd ~/services/
+```
 
 ## Database
 
