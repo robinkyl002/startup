@@ -2026,6 +2026,54 @@ Notice that with CORS, _it is the browser that is protecting the user from acces
 
 Test services you want to use to make sure they will allow you to make requests
 
+#### fetch
+
+- Preferred way of making HTTP requests
+- Takes URL and returns promise
+- `then` function of promise takes callback function that is asynchronously called when URL content is obtained.
+- If the returned content is of type application/json you can use the json function on the response object to convert it to a JavaScript object.
+
+Example fetch request for inspirational quote:
+
+```
+fetch('https://api.quotable.io/random')
+  .then((response) => response.json())
+  .then((jsonResponse) => {
+    console.log(jsonResponse);
+  });
+```
+
+Response:
+
+```
+{
+  content: 'Never put off till tomorrow what you can do today.',
+  author: 'Thomas Jefferson',
+};
+```
+
+**POST request**
+
+- Populate the options parameter with the HTTP method and headers
+
+```
+fetch('https://jsonplaceholder.typicode.com/posts', {
+  method: 'POST',
+  body: JSON.stringify({
+    title: 'test title',
+    body: 'test body',
+    userId: 1,
+  }),
+  headers: {
+    'Content-type': 'application/json; charset=UTF-8',
+  },
+})
+  .then((response) => response.json())
+  .then((jsonResponse) => {
+    console.log(jsonResponse);
+  });
+```
+
 ### Class notes
 
 #### October 26 Class - URL, Ports, HTTP, Fetch, CORS, Service Design
