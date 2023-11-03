@@ -2001,6 +2001,31 @@ HTTP versions:
 | 2015 | HTTP2 | multiplex, server push, binary representation |
 | 2022 | HTTP3 | QUIC for transport protocol, always encrypted |
 
+#### CORS
+
+Same Origin Policy (SOP) - Only allows site to fulfill requests from itself
+
+CORS allows the client (e.g. browser) to specify the origin of a request and then let the server respond with what origins are allowed. The server may say that all origins are allowed, for example if they are a general purpose image provider, or only a specific origin is allowed, for example if they are a bank's authentication service. If the server doesn't specify what origin is allowed then the browser assumes that it must be the same origin.
+
+Going back to our hacker example, the HTTP request from the hacker site (byu.iinstructure.com) to the course's authentication service (byu.instructure.com) would look like the following.
+
+```
+GET /api/auth/login HTTP/2
+Host: byu.instructure.com
+Origin: https://byu.iinstructure.com
+```
+
+Response:
+
+```
+HTTP/2 200 OK
+Access-Control-Allow-Origin: https://byu.instructure.com
+```
+
+Notice that with CORS, _it is the browser that is protecting the user from accessing the course website's authentication endpoint from the wrong origin_. CORS is only meant to alert the user that something nefarious is being attempted. A hacker can still proxy requests through their own server to the course website and completely ignore the Access-Control-Allow-Origin header. Therefore the course website needs to implement its own precautions to stop a hacker from using its services inappropriately.
+
+Test services you want to use to make sure they will allow you to make requests
+
 ### Class notes
 
 #### October 26 Class - URL, Ports, HTTP, Fetch, CORS, Service Design
