@@ -2234,6 +2234,222 @@ GraphQL helps to remove a lot of the logic for parsing endpoints and mapping req
 
 The downside of that flexibility is that the client now has significant power to consume resources on the server. There is no clear boundary on what, how much, or how complicated the aggregation of data is. It also is difficult for the server to implement authorization rights to data as they have to be baked into the data schema. However, there are standards for how to define a complex schema. Common GraphQL packages provide support for schema implementations along with database adaptors for query support.
 
+#### Node.js
+
+- First successful application for deploying JavaScript outside of a browser
+- JavaScript can run on the server as well
+
+Install NVM (Node Version Manager) on Mac:
+
+```
+➜ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+
+➜ . ~/.nvm/nvm.sh
+```
+
+Install LTS (long term support) version of NVM
+
+```
+➜ nvm install --lts
+```
+
+Check that Node is installed and check version
+
+`node -v`
+
+**Running Programs**
+
+Execute a line of JS using `-e` parameter
+
+```
+node -e "console.log(1+1)"
+2
+```
+
+However, to do real work you need to execute an entire project composed of dozens or even hundreds of JavaScript files. You do this by creating a single starting JavaScript file, named something like `index.js`, that references the code found in the rest of your project. You then execute your code by running `node` with `index.js` as a parameter. For example, with the following JavaScript saved to a file named `index.js`
+
+```
+function countdown() {
+  let i = 0;
+  while (i++ < 5) {
+    console.log(`Counting ... ${i}`);
+  }
+}
+
+countdown();
+```
+
+```
+➜  node index.js
+Counting ... 1
+Counting ... 2
+Counting ... 3
+Counting ... 4
+Counting ... 5
+```
+
+You can also run `node` in interpretive mode by executing it without any parameters and then typing your JavaScript code directly into the interpreter.
+
+```
+➜ node
+Welcome to Node.js v16.15.1.
+> 1+1
+2
+> console.log('hello')
+hello
+```
+
+**NPM (Node Package Manager)**
+
+- Access preexisting packages of JS for common tasks
+- Two steps to load package using Node.js
+  - install package locally using npm
+  - include require statement in code referencing package name
+  - npm is installed when Node.js is installed
+- search for packages on NPM website
+- before installing packages, initialize code to use NPM
+  - run `npm init` in directory that will contain JS
+    - if you want to accept all defaults use `npm init -y`
+
+```
+➜  mkdir npmtest
+➜  cd npmtest
+➜  npm init -y
+```
+
+**Package.json**
+
+- created after npm is initialized
+- contains three main things
+  1. Metadata about your project such as its name and the default entry JavaScript file
+  1. commands (scripts) that you can execute to do things like run, test, or distribute your code
+  1. packages that this project depends upon
+- contains simple placeholder script that runs echo command when you run `npm run test` in console
+
+Example package.json content:
+
+```
+{
+  "name": "npmtest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
+```
+
+Installing a node package named `give-me-a-joke`
+
+`➜  npm install give-me-a-joke`
+
+Reference added to package.json to `give-me-a-joke`
+
+```
+{
+  "name": "npmtest",
+  "version": "1.0.0",
+  "description": "Simple Node.js demo",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "node index.js"
+  },
+  "dependencies": {
+    "give-me-a-joke": "^0.5.1"
+  }
+}
+```
+
+- `package-lock.json` file and `node_modules` directory are automatically created when packages are installed
+  - The `node_modules` directory contains the actual JavaScript files for the package and all of its dependent packages.
+  - store `node_modules` in `.gitignore` because it can get very large and you don't want it slowing down your version control (i.e. git)
+  - When you clone your source code from GitHub to a new location, the first thing you should do is run `npm install` in the project directory. This will cause NPM to download all of the previously installed packages and recreate the `node_modules` directory.
+  - The `package-lock.json` file tracks the version of the package that you installed
+    - helps prevent compatibility issues when updates to packages happen
+
+System is now ready to use the joke package
+
+- call the package by passing it as a parameter to the `require` function
+- call `getRandomDadJoke` function which comes with the package
+
+Creating index.js file:
+
+```
+const giveMeAJoke = require('give-me-a-joke');
+giveMeAJoke.getRandomDadJoke((joke) => {
+  console.log(joke);
+});
+```
+
+Running Node.js will give results like this
+
+```
+➜  node index.js
+What do you call a fish with no eyes? A fsh.
+```
+
+**Summary of Steps**
+
+1. Create your project directory
+1. Initialize it for use with NPM by running npm init -y
+1. Make sure .gitignore file contains node_modules
+1. Install any desired packages with npm install <package name here>
+1. Add require('<package name here>') to your application's JavaScript
+1. Use the code the package provides in your JavaScript
+1. Run your code with node index.js
+
+**Creating a Web Service**
+
+Write code that listens on a specified port (i.e. 8080, 443, etc.), receives HTTP requests, processes them and then responds
+
+Create Project:
+
+```
+➜ mkdir webservicetest
+➜ cd webservicetest
+➜ npm init -y
+```
+
+Create `index.js` file in code editor and add following code
+
+```
+const http = require('http');
+const server = http.createServer(function (req, res) {
+  res.writeHead(200, { 'Content-Type': 'text/html' });
+  res.write(`<h1>Hello Node.js! [${req.method}] ${req.url}</h1>`);
+  res.end();
+});
+
+server.listen(8080, () => {
+  console.log(`Web service listening on port 8080`);
+});
+```
+
+- uses HTTP package built into Node.js (`http.createServer` function)
+- callback function with parameters `req` (request object) and `res` (response object)
+- Function is called whenever an HTTP request is received
+- In example, callback always returns the same HTML snippet, with a status code of 200, and a Content-Type header, no matter what request is made.
+  - A real web service would examine the HTTP path and return meaningful content based upon the purpose of the endpoint.
+- The `server.listen` call starts listening on port 8080 and blocks until the program is terminated.
+
+Execute program and if it is successful, response will be this
+
+```
+➜ node index.js
+Web service listening on port 8080
+```
+
+Results can be viewed by going to `localhost:8080` in browser
+
+- kill process by using `CTRL-C`
+
+Note that you can also start up Node and execute the index.js code directly in VS Code. To do this open `index.js` in VS Code and press the 'F5' key. This should ask you what program you want to run. Select `node.js`. This starts up Node.js with the `index.js` file, but also attaches a debugger so that you can set breakpoints in the code and step through each line of code.
+
 ### Class notes
 
 #### October 26 Class - URL, Ports, HTTP, Fetch, CORS, Service Design
