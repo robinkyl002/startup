@@ -2074,6 +2074,166 @@ fetch('https://jsonplaceholder.typicode.com/posts', {
   });
 ```
 
+#### Service Design
+
+**Model and Sequence Diagrams**
+
+- Model application's primary objects and interactions of the objects
+- Stay as close as possible to the model that is in the user's mind.
+  - i.e. model participants, conversations, and messages rather than devices, network connections and data blobs
+- Create sequence diagrams to illustrate interactions between objects
+- Identify need for endpoints
+- Tools such as sequencediagram.org can help build diagrams
+
+**Using HTTP**
+
+- HTTP verbs can help with the design of the diagram and interactions with the web service
+  - GET (list comments)
+  - POST (create a comment)
+  - PUT (update a comment)
+  - DELETE (delete a comment)
+- MIME content types help identify types of content to provide
+  - HTML, PNG, MP3, MP4
+- Don't recreate functionality that could be provided using web service
+- Take advantage of significant networking built around HTTP
+  - i.e. caching servers to increase performance, edge servers to bring content closer, replication servers to provide redundant copies of content and make application more resilient to network failures
+
+**Endpoints**
+
+- Web service is usually divided up into multiple service endpoints
+- Each endpoint provides a single functional purpose
+- Use same criteria when exposing service endpoints as when creating well designed code functions
+
+_Note that service endpoints are often called an Application Programming Interface (API). This is a throwback to old desktop applications and the programming interfaces that they exposed. Sometimes the term API refers to the entire collection of endpoints, and sometimes it is used to refer to a single endpoint._
+
+Things to consider when designing service's endpoints:
+
+- Grammatical
+
+  - With HTTP everything is a resource (think noun or object)
+  - Act on the resource with an HTTP verb.
+    - For example, you might have an order resource that is contained in a store resource. You then create, get, update, and delete order resources on the store resource.
+
+- Readable
+
+  - The resource you are referencing with an HTTP request should be clearly readable in the URL path.
+    - For example, an order resource might contain the path to both the order and store where the order resource resides: /store/provo/order/28502. This makes it easier to remember how to use the endpoint because it is human readable.
+
+- Discoverable
+  - As you expose resources that contain other resources you can provide the endpoints for the aggregated resources. This makes it so someone using your endpoints only needs to remember the top level endpoint and then they can discover everything else.
+    - For example, if you have a store endpoint that returns information about a store you can include an endpoint for working with a store in the response.
+
+```
+GET /store/provo  HTTP/2
+```
+
+```
+{
+  "id": "provo",
+  "address": "Cougar blvd",
+  "orders": "https://cs260.click/store/provo/orders",
+  "employees": "https://cs260.click/store/provo/employees"
+}
+```
+
+- Compatible
+  - When you build your endpoints you want to make it so that you can add new functionality without breaking existing clients. Usually this means that the clients of your service endpoints should ignore anything that they don't understand. Consider the two following JSON response versions.
+
+Version 1:
+
+```
+{
+  "name": "John Taylor"
+}
+```
+
+Version 2:
+
+```
+{
+  "name": "John Taylor",
+  "givenName": "John",
+  "familyName": "Taylor"
+}
+```
+
+By adding a new representation of the name field, you provide new functionality for clients that know how to use the new fields without harming older clients that ignore the new fields and simply use the old representation. This is all done without officially versioning the endpoint.
+
+If you are fortunate enough to be able to control all of your client code you can mark the name field as depreciated and in a future version remove it once all of the clients have upgraded. Usually you want to keep compatibility with at least one previous version of the endpoint so that there is enough time for all of the clients to migrate before compatibility is removed.
+
+- Simple
+
+  - Keeping your endpoints focused on the primary resources of your application helps to avoid the temptation to add endpoints that duplicate or create parallel access to primary resources. It is very helpful to write some simple class and sequence diagrams that outline your primary resources before you begin coding. These resources should focus on the actual resources of the system you are modeling. They should not focus on the data structure or devices used to host the resources. There should only be one way to act on a resource. Endpoints should only do one thing.
+
+- Documented
+  - The Open API Specification is a good example of tooling that helps create, use, and maintain documentation of your service endpoints. It is highly suggested that you make use of such tools in order to provide client libraries for your endpoints and a sandbox for experimentation. Creating an initial draft of your endpoint documentation before you begin coding will help you mentally clarify your design and produce a better final result. Providing access to your endpoint documentation along with your production system helps with client implementations and facilitates easier maintenance of the service. The Swagger Petstore example documentation is a reasonable example to follow.
+
+There are many models for exposing endpoints. We will consider three common ones, RPC, REST, and GraphQL.
+
+**RPC (Remote Procedure Calls)**
+
+- expose service endpoints as simple function calls
+- When RPC is used over HTTP it usually just leverages the POST HTTP verb
+- The actual verb and subject of the function call is represented by the function name.
+  - For example, deleteOrder or updateOrder. The name of the function is either the entire path of the URL or a parameter in the POST body.
+
+```
+POST /updateOrder HTTP/2
+
+{"id": 2197, "date": "20220505"}
+```
+
+```
+POST /rpc HTTP/2
+
+{"cmd":"updateOrder", "params":{"id": 2197, "date": "20220505"}}
+```
+
+One advantage of RPC is that it maps directly to function calls that might exist within the server. This could also be considered a disadvantage as it directly exposes the inner workings of the service, and thus creates a coupling between the endpoints and the implementation.
+
+**REST (Representational State Transfer)**
+
+- Attempts to take advantage of the foundational principles of HTTP
+- REST HTTP verbs always act upon a resource.
+- Operations on a resource impact the state of the resource as it is transferred by a REST endpoint call.
+  - Allows for the caching functionality of HTTP to work optimally. For example, GET will always return the same resource until a PUT is executed on the resource. When PUT is used, the cached resource is replaced with the updated resource.
+
+With REST the updateOrder endpoint would look like the following.
+
+```
+PUT /order/2197 HTTP/2
+
+{"date": "20220505"}
+```
+
+- Where the proper HTTP verb is used and the URL path uniquely identifies the resource. These seem like small differences, but maximizing HTTP pays dividends by making it easy for HTTP infrastructure, such as caching, to work properly.
+
+**GraphQL**
+
+- Focuses on the manipulation of data instead of a function call (RPC) or a resource (REST).
+- The heart of GraphQL is a query that specifies the desired data and how it should be joined and filtered.
+- Developed to address frustration concerning the massive number of REST, or RPC calls, that a web application client needed to make in order to support even a simple UI widget.
+
+Instead of making a call for getting a store, and then a bunch of calls for getting the store's orders and employees, GraphQL would send a single query that would request all of that information in one big JSON response. The server would examine the query, join the desired data, and then filter out anything that was not wanted.
+
+Here is an example GraphQL query.
+
+```
+query {
+  getOrder(id: "2197") {
+    orders(filter: {date: {allofterms: "20220505"}}) {
+      store
+      description
+      orderedBy
+    }
+  }
+}
+```
+
+GraphQL helps to remove a lot of the logic for parsing endpoints and mapping requests to specific resources. Basically in GraphQL there is only one endpoint. The query endpoint.
+
+The downside of that flexibility is that the client now has significant power to consume resources on the server. There is no clear boundary on what, how much, or how complicated the aggregation of data is. It also is difficult for the server to implement authorization rights to data as they have to be baked into the data schema. However, there are standards for how to define a complex schema. Common GraphQL packages provide support for schema implementations along with database adaptors for query support.
+
 ### Class notes
 
 #### October 26 Class - URL, Ports, HTTP, Fetch, CORS, Service Design
