@@ -61,3 +61,5 @@ Have you ever gone down a rabbit hole when you tried to search something up on y
 - Added functionality to store username in local storage
 - Added way to identify if person was logged in and changed nav bar item to display "Log out" if so
 - Added beginning of function to allow interaction and playing.
+
+## Web Service Deliverables
