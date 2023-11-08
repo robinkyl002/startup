@@ -3039,7 +3039,29 @@ pm2 ls
 cd ~/services/
 ```
 
-#### November 7 Class -
+#### November 7 Class - Web Services: Simon service, UI & Endpoint testing
+
+Code for web service won't be a lot, but it needs to be done correctly
+
+Express does middleware (between request and response) and helps listen for and handle HTTP requests
+
+PM2 keeps backend running
+
+Node.js has already been in use since we set up our servers
+
+- `app.use(express.static('public'));`
+  - serving up what is in the public directory
+
+Modifying existing Express and index.js files
+
+- package.json
+  - dependencies included
+- package-lock.json
+  - versions of public dependencies
+- node_modules
+  - everything installed using npm
+
+index.js for simon is storing scores in backend storage so it is maintained between all sessions on any browsers as long as the service is running. If a new deployment is done or the service is stopped, the scores reset
 
 ## Database
 
