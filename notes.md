@@ -3065,7 +3065,131 @@ index.js for simon is storing scores in backend storage so it is maintained betw
 
 ## Database
 
+### Assignments
+
+### Class notes
+
+#### November 9 Class - Web Services: Storage, authentication
+
+MongoDB only sends info using JSON
+
+If your info requires a different way of transfer, store link (URL) to data in MongoDB
+
+MySQL - relational database (original type)
+
+Many different kinds of databases for storing different types of data
+
+Using MongoDB
+
+```
+npm install mongodb
+```
+
+```
+const { MongoClient } = require('mongodb');
+
+const userName = 'holowaychuk';
+const password = 'express';
+const hostname = 'yourdb.mongodb.com';
+
+const url = `mongodb+srv://${userName}:${password}:@{hostname}`
+
+const client = new MongoClient(url);
+const db = client.db('startup');
+```
+
+Testing connection
+
+```
+client
+ .connect()
+ .then(() => db.command({ ping: 1 }))
+ .catch((ex) => {
+   console.log(`Error with ${url} because ${ex.message}`);
+   process.exit(1);
+ });
+
+```
+
+Create `dbConfig.json` to store login data
+Make sure it is in `.gitignore` file otherwise it will be available to everyone
+
+```
+{
+  "hostname": "cs260.abcdefg.mongodb.net",
+  "userName": "myMongoUserName",
+  "password": "toomanysecrets"
+}
+
+```
+
+In place of hardcoded login data
+This login data will be the login data for the specific database you created, not the MongoDB account
+
+```
+const { MongoClient } = require('mongodb');
+const cfg = require('./dbConfig.json');
+const houses = require('./houses');
+
+const url = `mongodb+srv://${cfg.userName}:${cfg.password}@${cfg.hostname}`;
+
+const client = new MongoClient(url);
+const scoreCollection = client.db('startup').collection('score');
+
+
+
+async function main() {
+  const client = new MongoClient(url);
+  const scoreCollection = client.db('testing').collection('score');
+  const houseCollection = client.db('testing').collection('house');
+
+  try{
+    await client.connect();
+    await scoreCollection.insertOne({name: 'tim', score: 42});
+    await scoreCollection.insertMany(scores);
+    await houseCollection.insertMany(houses);
+  }
+}
+```
+
+Searching in database, under the collection "house"
+
+```
+// find everything
+db.house.find();
+
+// find houses with beds greater than or equal to 2
+db.house.find({beds:{$gte:2}});
+
+// find houses with a status of open and less than three beds
+db.house.find({status:"open",beds:{$lt: 3}});
+
+// find houses with less than three beds or a price less than 1000
+db.house.find({$or:[beds:{$lt: 3},price:{$lt:1000}]});
+
+// find houses with a summary of either modern or beach
+db.house.find({summary:/(modern|beach)/i});
+```
+
 ## Login
+
+### Assignments
+
+### Class Notes
+
+#### November 9 Class - Web Services: Storage, authentication
+
+Very basic version
+
+Send data to data service to be stored until needed on the next login
+
+Storing as plain text is not secure
+
+- Use hash version to store the password
+
+Most modern systems also use salting
+
+- hashes the password, then adds some more random stuff to make it more secure
 
 ## WebSocket
 
