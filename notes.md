@@ -3599,4 +3599,63 @@ Most modern systems also use salting
 
 ## WebSocket
 
+### Assignments
+
+### Class notes
+
+#### November 14 Class - Websockets
+
+Allow talking back and forth to avoid needing to keep sending requests repeatedly to look for changes
+
+- i.e. when playing a game online, you don't want to keep asking if the person has made a move
+
+Live Server is acting as a websocket when it updates as we make changes to the code in VS code
+Creating a party instead of making them request through HTTP anytime they need things
+
+Server side
+
+```
+const { WebSocketServer } = require('ws');
+
+const wss = new WebSocketServer({ port: 9900 });
+
+// Creating event listener
+// on connection, call function using websocket as parameter
+wss.on('connection', (ws) => {
+
+  // when message is received take data and turn it into a string
+  ws.on('message', (data) => {
+    const msg = String.fromCharCode(...data);
+
+    // put into the console "received 'message'"
+    // msg came from websocket
+    console.log('received: %s', msg);
+
+    // sending back to websocket
+    ws.send(`I heard you say "${msg}"`);
+  });
+
+  // sending initial response
+  ws.send('Hello webSocket');
+});
+```
+
+Browser
+
+```
+const socket = new WebSocket('ws://localhost:9900');
+
+// event listener
+socket.onmessage = (event) => {
+  console.log('received: ', event.data);
+};
+
+// sending message to server
+socket.send('I am listening');
+```
+
+Chat example - we need a server if we want to communicate with several people
+
+- websocket only works between two parties
+
 ## React
