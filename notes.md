@@ -3659,3 +3659,137 @@ Chat example - we need a server if we want to communicate with several people
 - websocket only works between two parties
 
 ## React
+
+### Assignments
+
+### Class Notes
+
+#### November 16 Class - React Introduction
+
+npx - part of npm that runs things
+
+```
+npx create-react-app testreact
+```
+
+```
+cd testreact
+npm start
+```
+
+- React creates files in the specified directory
+  - `package.json`
+  - `package-lock.json`
+  - `node_modules`
+  - `src`
+  - `public`
+  - `README.md`
+
+**Web Frameworks**
+
+- Simplify common patterns
+- Provide common components
+
+- Lots of frameworks (React, Angular, Vue.js, Svelte, Preact, Ember, Solid, etc.)
+
+**JSX**
+
+Combining JS and HTML
+Slightly different from JS
+
+```
+const i = 3;
+const list = (
+  <ol class = 'big'>
+    <li> Item {i}</li>
+    <li>Item {3+i} </li>
+    </ol>
+);
+```
+
+Babel changes to
+
+```
+const i = 3;
+
+const list = React.createElement (
+  'ol',
+  { class: 'big' },
+
+  // you should give ideas so React can identify changes and update the screen
+  React.createElement('li', null, 'Item ', i),
+  React.createElement('li', null, 'Item ', 3 + i)
+);
+
+```
+
+You can use Babel in Codepen (Change processor settings on JS to use Babel)
+
+- Think about application as one page (blank canvas) - empty div
+
+- Components that are only added when certain things happen or certain criteria are met
+
+- CSS is not bundled with HTML and JS in JSX in React
+
+- Component is function that returns HTML
+  - [Component function example](https://codepen.io/robinkyl002/pen/wvNPLve)
+- `ReactDOM.render()` takes the HTML that should be put out, and which id it should be applied to
+
+- Component Class - have been used in the past, don't use now
+  - [Component Class Example](https://codepen.io/robinkyl002/pen/LYqOKbV)
+
+```
+import React from "https://cdn.skypack.dev/react";
+import ReactDOM from "https://cdn.skypack.dev/react-dom";
+
+const Hello = ({ phrase }) => {
+  return (
+    <div>
+      <p>Hello {phrase}</p>
+    </div>
+  );
+};
+
+ReactDOM.render(<Hello phrase="function" />, document.querySelector("#root"));
+```
+
+Using props
+
+```
+import React from "https://cdn.skypack.dev/react";
+import ReactDOM from "https://cdn.skypack.dev/react-dom";
+
+const Hello = (props) => {
+  return (
+    <div>
+      <p>Hello {props.phrase}</p>
+    </div>
+  );
+};
+
+ReactDOM.render(<Hello phrase="function" />, document.querySelector("#root"));
+```
+
+```
+const Hello = ({ phrase }) => {
+  // React.useState() helps the program to remember details about the content (i.e. color)
+  // variable that it is applied to, setter function that can change that
+  // whatever is passed into React.useState() is initial state
+  const [color, setColor] = React.useState("red");
+
+  function changeColor() {
+    setColor(color === "red" ? "green" : "red");
+  }
+
+  return (
+    <div>
+    <p style={{ color: color }}>Hello {phrase}</p>
+    <button onClick={changeColor}>change</button>
+    </div>
+  );
+};
+
+ReactDom.render(<Hello phrase="function" />, document.querySelector("#root"));
+```
+
+[Submit example in Codepen](https://codepen.io/robinkyl002/pen/QWYOXBZ?editors=0010)
