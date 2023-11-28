@@ -3793,3 +3793,67 @@ ReactDom.render(<Hello phrase="function" />, document.querySelector("#root"));
 ```
 
 [Submit example in Codepen](https://codepen.io/robinkyl002/pen/QWYOXBZ?editors=0010)
+
+#### November 28 Class - React Router and Toolchain
+
+Toolchain - Vite
+
+`const uuid = require('uuid');` - allows unique identifiers
+
+`setInterval` function enables the websocket to stay alive and not cut out unexpectedly.
+
+Routing the DOM injection of components
+
+```
+constn root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <BrowserRouter>
+    <div className='app'>
+      <nav>
+        <NavLink to='/'>Home</NavLink>
+        <NavLink to='/about'>About</NavLink>
+        <NavLink to='/users'>Users</NavLink>
+      </nav>
+      <main>
+        <Routes>
+          <Route path='/' element={<Home />} exact />
+          <Route path='/about' element={<About />}  />
+          <Route path='/users' element={<Users />}  />
+          <Route path='*' element={<Navigate to='/' replace />}  />
+        </Routes>
+      </main>
+    </div>
+  </BrowserRouter>
+);
+```
+
+**Toolchain**
+
+Vite
+
+- `npm run build`
+  - Use only when ready to deploy final version
+- Will run Babel, Minify JS to create page
+- Babel - Transpile(change to HTML and JS), Bundle, Polyfill(backwards compatibility)
+- Minify(compress to run more efficiently)
+- `npm run dev`
+  - Does same work with Babel and Minify, but also creates Dev HTTP server with debugging tools
+
+Dev version will rearrange files to make it efficient and allow it to work correctly
+
+```
+npm create vite@latest demoVite -- -- template react
+
+cd demoVite
+
+npm install
+```
+
+While debugging, tell vite to look for proxy info(backend stuff) from port 3000
+
+vite.config.js
+
+```
+import {defineConfig} from 'vite';
+
+```
