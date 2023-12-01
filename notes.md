@@ -3857,3 +3857,28 @@ vite.config.js
 import {defineConfig} from 'vite';
 
 ```
+
+#### November 30 Class - React: Reactivity, Hooks, Tic-Tac-Toe
+
+React is a framework which is similar to a language
+
+Vite allows transpiling, running, debugging, minimizing code, optimizing code, polyfilling code (backwards compatibility), automating processes
+
+**Reactivity**
+
+Minimalized page in react where you put in different components
+
+- Properties to components
+- State on components (Pays attention to states and only reloads component if state changes)
+
+Don't need to reload the whole page, just the component that changes (i.e. date, time, downloading icon)
+
+React uses "shadow DOM" that looks for changes and evaluates changes that would happen to the actual DOM
+
+**Hooks**
+Lets you hook into functions
+
+`useState()` and `useEffect()`
+`useState()` - component state
+`useEffect` - lifecycle and external events
+When something happens, make these other changes
