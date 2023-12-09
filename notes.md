@@ -3882,3 +3882,17 @@ Lets you hook into functions
 `useState()` - component state
 `useEffect` - lifecycle and external events
 When something happens, make these other changes
+
+#### December 7 Class - Simon React
+
+Step 1 for converting to React
+
+1. Clone repo
+1. Reorganize code
+1. Install/configure vite
+1. Install react and react bootstrap
+1. Create app component
+1. Create view component stubs
+1. Create BrowserRouter
+
+Step 2 for converting to React - Migrate frontend code into view components
