@@ -63,3 +63,6 @@ Have you ever gone down a rabbit hole when you tried to search something up on y
 - Added beginning of function to allow interaction and playing.
 
 ## Web Service Deliverables
+
+- Added call to web service on the scores page
+- Added to the Javascript for the play page to try to allow interaction
