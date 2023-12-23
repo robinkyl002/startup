@@ -3896,3 +3896,44 @@ Step 1 for converting to React
 1. Create BrowserRouter
 
 Step 2 for converting to React - Migrate frontend code into view components
+
+## Final Exam
+
+1. Ports
+
+- HTTP - 80
+- HTTPS - 443
+- SSH - 22
+
+2. Status codes
+
+- 3xx - Redirect to some other location, or that the previously cached resource is still valid.
+- 4xx - Client errors. The request is invalid.
+- 5xx - Server errors. The request cannot be satisfied due to an error on the server.
+
+3. What does the HTTP header content-type allows you to do?
+
+- Say what format the reponse content should be in
+
+4. Attributes of a cookie
+
+- Domain - specifies which server can receive a cookie
+- Path - URL path that must exist in the requested URL in order to send the Cookie header
+- SameSite - If you set SameSite to Strict, your cookie will only be sent in a first-party context. In user terms, the cookie will only be sent if the site for the cookie matches the site currently shown in the browser's URL bar. Lax allows it to be accessed if following a link to the site. None allows it to be accessed by any site.
+- HTTPOnly - prevents capturing data stored on these cookies using JS.
+
+UseEffect Hook
+
+- useEffect is a Hook, so you can only call it at the top level of your component or your own Hooks. You can’t call it inside loops or conditions. If you need that, extract a new component and move the state into it.
+
+- If you’re not trying to synchronize with some external system, you probably don’t need an Effect.
+
+- When Strict Mode is on, React will run one extra development-only setup+cleanup cycle before the first real setup. This is a stress-test that ensures that your cleanup logic “mirrors” your setup logic and that it stops or undoes whatever the setup is doing. If this causes a problem, implement the cleanup function.
+
+- If some of your dependencies are objects or functions defined inside the component, there is a risk that they will cause the Effect to re-run more often than needed. To fix this, remove unnecessary object and function dependencies. You can also extract state updates and non-reactive logic outside of your Effect.
+
+- If your Effect wasn’t caused by an interaction (like a click), React will generally let the browser paint the updated screen first before running your Effect. If your Effect is doing something visual (for example, positioning a tooltip), and the delay is noticeable (for example, it flickers), replace useEffect with useLayoutEffect.
+
+- Even if your Effect was caused by an interaction (like a click), the browser may repaint the screen before processing the state updates inside your Effect. Usually, that’s what you want. However, if you must block the browser from repainting the screen, you need to replace useEffect with useLayoutEffect.
+
+- Effects only run on the client. They don’t run during server rendering.

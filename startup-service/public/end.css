@@ -15,9 +15,10 @@ main {
     
 }
 
-#cave {
-    height: 100%;
-    width: 100%;
+#picture {
+    height: 30vh;
+    width: 75vw;
+    object-fit: cover;
 }
 
 footer {
