@@ -1,0 +1,35 @@
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.navigation {
+    flex: 0 80px;
+}
+
+main {
+    flex: 1 calc(100vh - 120px);
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    flex: 0 40px;
+    background-color: lightgray;
+}
+
+#picture {
+    flex: 2;
+    
+    object-fit: cover;
+}
+
+thead {
+    border-bottom: black solid medium;
+}
+
+table {
+    flex: 1;
+    padding-left: 25px;
+    padding-right: 25px;
+}

@@ -1,0 +1,27 @@
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.navigation {
+    flex: 0 80px;
+}
+
+main {
+    flex: 1 calc(100vh - 120px);
+    background-color: #543818;
+    text-align: center;
+    padding: 25vh;
+    
+}
+
+#picture {
+    height: 30vh;
+    width: 75vw;
+    object-fit: cover;
+}
+
+footer {
+    flex: 0 40px;
+    background-color: lightgray;
+}
